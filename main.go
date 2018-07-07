@@ -12,8 +12,8 @@ import (
 func newRouter() *mux.Router {
 	r := mux.NewRouter()
 
-	r.HandleFunc("/dietDay", getDietDaysHandler).Methods("GET")
-	r.HandleFunc("/dietDay", createDietDayHandler).Methods("POST")
+	r.HandleFunc("/dietDays", getDietDaysHandler).Methods("GET")
+	r.HandleFunc("/dietDays", createDietDayHandler).Methods("POST")
 
 	return r
 }

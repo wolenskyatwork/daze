@@ -15,6 +15,8 @@ type DietDay struct {
 var dietDays []DietDay
 
 func getDietDaysHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+
 	dietDaysBytes, err := json.Marshal(dietDays)
 
 	if err != nil {
@@ -28,6 +30,7 @@ func getDietDaysHandler(w http.ResponseWriter, r *http.Request) {
 
 func createDietDayHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("you hit a thing")
+	enableCors(&w)
 	dietDay := DietDay{}
 
 	err := r.ParseForm()
@@ -50,4 +53,8 @@ func createDietDayHandler(w http.ResponseWriter, r *http.Request) {
 	dietDays = append(dietDays, dietDay)
 
 	http.Redirect(w, r, "/assets/", http.StatusFound)
+}
+
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 }
